@@ -63,6 +63,7 @@ public class RunController {
     }
 
     @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void updateRun(@PathVariable Integer id, @RequestBody Run run) {
         var runToUpdate = repo.findById(id);
 
@@ -71,5 +72,11 @@ public class RunController {
         }
 
         repo.updateRun(runToUpdate.get());
+    }
+
+    @GetMapping("/Location/{location}")
+    List<Run> getRunsByLocation(@PathVariable String location)
+    {
+        return repo.findByLocation(location);
     }
 }
